@@ -1,0 +1,12 @@
+[
+  { "id":"tab_test01","type":"tab","label":"Ping & Actility test","disabled":false,"info":"" },
+
+  { "id":"ping_in01","type":"http in","z":"tab_test01","name":"GET /ping","url":"/ping","method":"get","upload":false,"swaggerDoc":"","x":170,"y":100,"wires":[["ping_tpl01"]] },
+  { "id":"ping_tpl01","type":"template","z":"tab_test01","name":"pong","field":"payload","fieldType":"msg","format":"handlebars","syntax":"mustache","template":"pong","output":"str","x":360,"y":100,"wires":[["ping_out01"]] },
+  { "id":"ping_out01","type":"http response","z":"tab_test01","name":"","statusCode":"200","headers":{},"x":550,"y":100,"wires":[] },
+
+  { "id":"act_in01","type":"http in","z":"tab_test01","name":"POST /actility","url":"/actility","method":"post","upload":false,"swaggerDoc":"","x":170,"y":200,"wires":[["act_dbg01","act_ok01"]] },
+  { "id":"act_dbg01","type":"debug","z":"tab_test01","name":"UL payload","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"payload","targetType":"msg","x":380,"y":180,"wires":[] },
+  { "id":"act_ok01","type":"function","z":"tab_test01","name":"quick 200 JSON","func":"msg.payload = { ok: true };\nmsg.headers = { 'Content-Type': 'application/json' };\nreturn msg;","outputs":1,"noerr":0,"initialize":"","finalize":"","libs":[],"x":380,"y":220,"wires":[["act_out01"]] },
+  { "id":"act_out01","type":"http response","z":"tab_test01","name":"","statusCode":"200","headers":{},"x":570,"y":220,"wires":[] }
+]
